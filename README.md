@@ -1,3 +1,3 @@
 # Wolox bootstrap
 
-Use Angular-CLI and configure Jest for Unit test
+Create Angular-CLI project and configure Jest for Unit test
