@@ -6,8 +6,6 @@ import { updateTsConfig } from './utils/ts-config'
 import { angularJson } from './utils/angular-json'
 import { removeKarma } from './utils/remove-files'
 
-// You don't have to export the function as default. You can also have more than one rule factory
-// per file.
 export function woloxAngularBootstrap(_options: any): Rule {
   const { name } = _options
   return (tree: Tree, _context: SchematicContext) => {

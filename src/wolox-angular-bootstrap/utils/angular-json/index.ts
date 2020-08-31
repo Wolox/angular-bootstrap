@@ -5,7 +5,6 @@ import {
   SchematicsException,
 } from "@angular-devkit/schematics";
 import { angularJsonConfigTest } from './constants';
-// import { getProjectName } from "../path";
 
 export function angularJson(name: string): Rule {
   return (tree: Tree, _: SchematicContext): Tree => {
@@ -13,7 +12,6 @@ export function angularJson(name: string): Rule {
     if (tree.exists(path)) {
       const file = tree.read(path);
       const angular = JSON.parse(file!.toString());
-      // const project = getProjectName(tree);
       const architect = angular.projects[`${name}`].architect;
 
       architect.test = { ...angularJsonConfigTest };

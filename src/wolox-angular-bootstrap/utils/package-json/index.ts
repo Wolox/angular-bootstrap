@@ -15,17 +15,6 @@ export function updatePackageJson(name: string): Rule {
         ...json.scripts,
         test: "jest",
       };
-  
-      // Add pre-commit
-      json.husky = {
-        hooks: {
-          "pre-commit":
-            'pretty-quick --staged --pattern "apps/**/**/*.{ts,scss,html}"',
-        },
-      };
-
-      // Add jest configuration
-      // json.jest = jestPackage;
 
       // Add new dependencies
       json.dependencies = { ...json.dependencies, ...dependencies };
