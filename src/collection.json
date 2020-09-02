@@ -1,0 +1,10 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "wolox-angular-bootstrap": {
+      "description": "A blank schematic.",
+      "factory": "./wolox-angular-bootstrap/index#woloxAngularBootstrap",
+      "schema": "./wolox-angular-bootstrap/schema.json"
+    }
+  }
+}
