@@ -3,16 +3,36 @@
   "id": "NewRepoSchematic",
   "title": "ng new options schema",
   "type": "object",
-  "description": "Initialise a new project",
+  "description": "Initialize a new project",
   "properties": {
     "name": {
       "type": "string",
       "description": "The name of the project",
-      "x-prompt": "Name:",
+      "x-prompt": " What name would you like for project? ",
       "$default": {
         "$source": "argv",
         "index": 0
       }
-    } 
-  }
+    },
+    "routing": {
+      "type": "boolean",
+      "description": "Would you like to add Angular routing?",
+      "x-prompt": "Would you like to add Angular routing?",
+      "default": false
+    },
+    "style": {
+      "description": "The file extension or preprocessor to use for style files.",
+      "type": "string",
+      "x-prompt": "Which stylesheet format would you like to use?",
+      "default": "scss",
+      "enum": [
+        "css",
+        "scss",
+        "sass",
+        "less",
+        "styl"
+      ]
+    }
+  },
+  "required": ["name", "routing"]
 }

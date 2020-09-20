@@ -27,4 +27,9 @@ export const dependencies = {
 
 export const removeDependencies = [
   "@types/jasmine",
+  "karma",
+  "karma-chrome-launcher",
+  "karma-coverage-istanbul-reporter",
+  "karma-jasmine",
+  "karma-jasmine-html-reporter"
 ]
