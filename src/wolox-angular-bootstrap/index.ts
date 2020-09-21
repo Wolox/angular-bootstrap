@@ -20,7 +20,7 @@ export function woloxAngularBootstrap(_options: any): Rule {
       updatePackageJson(name),
       updateTsConfig(name),
       angularJson(name),
-      removeKarma()
+      removeKarma(name)
     ]);
 
     return rule(tree, _context) as Rule;
