@@ -1,6 +1,6 @@
 {
   "name": "wolox-angular-bootstrap",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Wolox bootstrap",
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -19,8 +19,9 @@
     "typescript": "~3.8.2"
   },
   "devDependencies": {
-    "@types/node": "^12.11.1",
+    "@schematics/angular": "^10.1.2",
     "@types/jasmine": "~3.5.0",
+    "@types/node": "^12.11.1",
     "jasmine": "^3.5.0"
   }
 }

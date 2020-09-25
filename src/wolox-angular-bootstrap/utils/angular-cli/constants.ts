@@ -1,8 +1,6 @@
 // TODO add routing and style to variables 
 export const options = {
-  version: "10.0.0",
-  routing: true,
-  style: "scss",
+  version: "10.1.2",
   inlineStyle: false,
   inlineTemplate: false,
 };

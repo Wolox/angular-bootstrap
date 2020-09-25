@@ -7,7 +7,7 @@ import { angularJson } from './utils/angular-json'
 import { removeKarma } from './utils/remove-files'
 
 export function woloxAngularBootstrap(_options: any): Rule {
-  const { name } = _options
+  const { name, style, routing } = _options
   return (tree: Tree, _context: SchematicContext) => {
     const templateSource = apply(url("./files"), [
       template({ ..._options, ...strings }),
@@ -15,12 +15,12 @@ export function woloxAngularBootstrap(_options: any): Rule {
     const merged = mergeWith(templateSource, MergeStrategy.Overwrite);
 
     const rule = chain([
-      schematicAngularCLI(name),
+      schematicAngularCLI(name, routing, style),
       merged,
       updatePackageJson(name),
       updateTsConfig(name),
       angularJson(name),
-      removeKarma()
+      removeKarma(name)
     ]);
 
     return rule(tree, _context) as Rule;
