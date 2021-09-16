@@ -2,7 +2,7 @@ import { Rule, SchematicContext, Tree, apply, url, template, mergeWith, MergeStr
 import { strings } from '@angular-devkit/core';
 import { schematicAngularCLI } from './utils/angular-cli'
 import { updatePackageJson } from './utils/package-json'
-import { updateTsConfig } from './utils/ts-config'
+import { updateTsConfig, updateTsConfigSpec } from './utils/ts-config'
 import { angularJson } from './utils/angular-json'
 import { removeKarma } from './utils/remove-files'
 
@@ -19,6 +19,7 @@ export function woloxAngularBootstrap(_options: any): Rule {
       merged,
       updatePackageJson(name),
       updateTsConfig(name),
+      updateTsConfigSpec(name),
       angularJson(name),
       removeKarma()
     ]);

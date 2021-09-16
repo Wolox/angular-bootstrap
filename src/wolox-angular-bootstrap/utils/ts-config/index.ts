@@ -4,7 +4,7 @@ import { NodePackageInstallTask } from "@angular-devkit/schematics/tasks";
 export function updateTsConfig(name: string): Rule {
   return (tree: Tree, context: SchematicContext): Tree => {
     context.addTask(new NodePackageInstallTask());
-    const path = `/${name}/tsconfig.base.json`;
+    const path = `/${name}/tsconfig.json`;
     if (tree.exists(path)) {
       const file = tree.read(path);
       // Remove comments
