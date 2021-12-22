@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "add-linter",
+  "title": "ng add linter schematic",
+  "type": "object",
+  "description": "Initialize linter"
+}
