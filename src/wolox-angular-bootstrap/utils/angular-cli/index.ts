@@ -11,7 +11,7 @@ import {
 } from '@schematics/angular/ng-new/schema';
 
 export function schematicAngularCLI(name: string): Rule {
-  return async (_tree: Tree, _context: SchematicContext) => {
+  return (_tree: Tree, _context: SchematicContext) => {
     const options: AngularNgNewSchema = {
       name,
       version: '13.x',

@@ -5,9 +5,9 @@ import {
   SchematicsException,
 } from '@angular-devkit/schematics';
 
-export function typescriptRules(): Rule {
+export function typescriptRules(projectName: string): Rule {
   return (tree: Tree, _: SchematicContext): Tree => {
-    const path = '.eslintrc.json';
+    const path = `./${projectName}/.eslintrc.json`;
     if (tree.exists(path)) {
       const eslintrc = (tree.read(path) as Buffer).toString();
       const json = JSON.parse(eslintrc);

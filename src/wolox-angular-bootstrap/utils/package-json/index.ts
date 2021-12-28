@@ -4,12 +4,10 @@ import {
   SchematicContext,
   SchematicsException,
 } from '@angular-devkit/schematics';
-import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { dependencies, devDependencies, removeDependencies } from './constants';
 
 export function updatePackageJson(name: string): Rule {
-  return (tree: Tree, context: SchematicContext): Tree => {
-    context.addTask(new NodePackageInstallTask());
+  return (tree: Tree, _context: SchematicContext): Tree => {
     const path = `/${name}/package.json`;
     if (tree.exists(path)) {
       const file = tree.read(path);

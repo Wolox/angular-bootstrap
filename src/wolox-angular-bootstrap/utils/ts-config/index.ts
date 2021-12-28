@@ -1,14 +1,19 @@
-import { Rule, Tree, SchematicContext, SchematicsException } from "@angular-devkit/schematics";
-import { NodePackageInstallTask } from "@angular-devkit/schematics/tasks";
+import {
+  Rule,
+  Tree,
+  SchematicContext,
+  SchematicsException,
+} from '@angular-devkit/schematics';
 
 export function updateTsConfig(name: string): Rule {
-  return (tree: Tree, context: SchematicContext): Tree => {
-    context.addTask(new NodePackageInstallTask());
+  return (tree: Tree, _context: SchematicContext): Tree => {
     const path = `/${name}/tsconfig.json`;
     if (tree.exists(path)) {
       const file = tree.read(path);
       // Remove comments
-      const fileString = file!.toString().replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '') 
+      const fileString = file!
+        .toString()
+        .replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '');
       const json = JSON.parse(fileString);
 
       // Update compilerOptions
@@ -16,7 +21,7 @@ export function updateTsConfig(name: string): Rule {
         ...json.compilerOptions,
         esModuleInterop: true,
       };
-  
+
       tree.overwrite(path, JSON.stringify(json, null, 2));
       return tree;
     }
@@ -25,27 +30,23 @@ export function updateTsConfig(name: string): Rule {
 }
 
 export function updateTsConfigSpec(name: string): Rule {
-  return (tree: Tree, context: SchematicContext): Tree => {
-    context.addTask(new NodePackageInstallTask());
+  return (tree: Tree, _context: SchematicContext): Tree => {
     const path = `/${name}/tsconfig.spec.json`;
     if (tree.exists(path)) {
       const file = tree.read(path);
       // Remove comments
-      const fileString = file!.toString().replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '') 
+      const fileString = file!
+        .toString()
+        .replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '');
       const json = JSON.parse(fileString);
-      
+
       // Update compilerOptions
       json.compilerOptions = {
         ...json.compilerOptions,
         emitDecoratorMetadata: true,
-        types: [
-          "jest"
-        ]
+        types: ['jest'],
       };
-      json.files = [
-        "src/polyfills.ts"
-      ],
-  
+      json.files = ['src/polyfills.ts'];
       tree.overwrite(path, JSON.stringify(json, null, 2));
       return tree;
     }

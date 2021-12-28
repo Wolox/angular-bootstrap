@@ -15,10 +15,11 @@ import { updatePackageJson } from './utils/package-json';
 import { updateTsConfig, updateTsConfigSpec } from './utils/ts-config';
 import { angularJson } from './utils/angular-json';
 import { removeKarma } from './utils/remove-files';
+import { RunSchematicTask } from '@angular-devkit/schematics/tasks';
 
 export function initialize(_options: any): Rule {
   const { name } = _options;
-  return (tree: Tree, _context: SchematicContext) => {
+  return (_tree: Tree, context: SchematicContext) => {
     const templateSource = apply(url('./files'), [
       template({ ..._options, ...strings }),
     ]);
@@ -34,6 +35,8 @@ export function initialize(_options: any): Rule {
       removeKarma(),
     ]);
 
-    return rule(tree, _context) as Rule;
+    context.addTask(new RunSchematicTask('add-linter', { project: name }));
+
+    return rule(_tree, context) as Rule;
   };
 }
