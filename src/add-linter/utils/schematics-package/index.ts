@@ -61,6 +61,9 @@ export function addESLintTargetToProject(
     lintFilePatternsRoot = existingProjectConfig.projects[projectName].root;
   }
 
+  existingProjectConfig.cli = existingProjectConfig?.cli
+    ? existingProjectConfig.cli
+    : {};
   existingProjectConfig.cli.defaultCollection = '@angular-eslint/schematics';
 
   const eslintTargetConfig = {

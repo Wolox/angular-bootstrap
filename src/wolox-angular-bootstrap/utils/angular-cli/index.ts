@@ -10,14 +10,18 @@ import {
   Style,
 } from '@schematics/angular/ng-new/schema';
 
-export function schematicAngularCLI(name: string): Rule {
+export function schematicAngularCLI(
+  name: string,
+  routing: boolean,
+  style = Style.Scss
+): Rule {
   return (_tree: Tree, _context: SchematicContext) => {
     const options: AngularNgNewSchema = {
       name,
       version: '13.x',
-      routing: true,
+      routing,
       strict: true,
-      style: Style.Scss,
+      style,
       directory: name,
       packageManager: PackageManager.Npm,
     };

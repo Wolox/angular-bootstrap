@@ -18,7 +18,7 @@ import { removeKarma } from './utils/remove-files';
 import { RunSchematicTask } from '@angular-devkit/schematics/tasks';
 
 export function initialize(_options: any): Rule {
-  const { name } = _options;
+  const { name, style, routing } = _options;
   return (_tree: Tree, context: SchematicContext) => {
     const templateSource = apply(url('./files'), [
       template({ ..._options, ...strings }),
@@ -26,13 +26,13 @@ export function initialize(_options: any): Rule {
     const merged = mergeWith(templateSource, MergeStrategy.Overwrite);
 
     const rule = chain([
-      schematicAngularCLI(name),
+      schematicAngularCLI(name, routing, style),
       merged,
       updatePackageJson(name),
       updateTsConfig(name),
       updateTsConfigSpec(name),
       angularJson(name),
-      removeKarma(),
+      removeKarma(name),
     ]);
 
     context.addTask(new RunSchematicTask('add-linter', { project: name }));

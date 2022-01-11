@@ -18,16 +18,23 @@ export const jestPackage = {
   ],
 };
 
-export const dependencies = {
-  '@angular-builders/jest': '^10.0.0',
-  '@types/jest': '^25.2.3',
-  jest: '^26.0.1',
-  'jest-preset-angular': '^8.2.0',
-};
-
 export const devDependencies = {
   '@angular-eslint/schematics': '^13.0.1',
   '@wolox/eslint-config-typescript': '^3.0.0',
 };
 
-export const removeDependencies = ['@types/jasmine'];
+export const dependencies = [
+  '@angular-builders/jest',
+  '@types/jest',
+  'jest',
+  'jest-preset-angular',
+];
+
+export const removeDependencies = [
+  '@types/jasmine',
+  'karma',
+  'karma-chrome-launcher',
+  'karma-coverage-istanbul-reporter',
+  'karma-jasmine',
+  'karma-jasmine-html-reporter',
+];
