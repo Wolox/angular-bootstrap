@@ -5,14 +5,13 @@ import {
   SchematicsException,
   chain,
 } from '@angular-devkit/schematics';
-import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import {
   dependencies,
   devDependencies,
   jestPackage,
   removeDependencies,
 } from './constants';
-import { get } from 'http';
+import { get } from 'https';
 
 import { concat, Observable, of } from 'rxjs';
 import { concatMap, map } from 'rxjs/operators';
@@ -23,8 +22,7 @@ export interface NodePackage {
 }
 
 export function removePackages(name: string): Rule {
-  return (tree: Tree, context: SchematicContext): Tree => {
-    context.addTask(new NodePackageInstallTask());
+  return (tree: Tree, _context: SchematicContext): Tree => {
     const path = `/${name}/package.json`;
     const json = readJsonFile(tree, path);
 
@@ -35,8 +33,7 @@ export function removePackages(name: string): Rule {
         test: 'jest',
       };
 
-      // Add new dependencies
-      json.dependencies = { ...json.dependencies, ...dependencies };
+      // Add new devDependencies
       json.devDependencies = { ...json.devDependencies, ...devDependencies };
       // Add jest config
       json.jest = { ...jestPackage };
@@ -65,7 +62,7 @@ function addPackages(name: string): Rule {
       map((packageFromRegistry: NodePackage) => {
         const { name, version } = packageFromRegistry;
         context.logger.debug(`Adding ${name}:${version} to Dev Dependencies`);
-        addPackageJsonDependency(tree, context, name, version, path);
+        addPackageJsonDependency(tree, name, version, path);
         return tree;
       })
     );
@@ -84,9 +81,12 @@ export function getLatestNodeVersion(
   const DEFAULT_VERSION = 'latest';
 
   return new Promise((resolve) => {
-    return get(`http://registry.npmjs.org/${packageName}`, (res) => {
+    return get(`https://registry.npmjs.org/${packageName}`, (res) => {
       let rawData = '';
-      res.on('data', (chunk) => (rawData += chunk));
+      res.setEncoding('utf8');
+      res.on('data', (chunk) => {
+        rawData += chunk;
+      });
       res.on('end', () => {
         try {
           const response = JSON.parse(rawData);
@@ -118,13 +118,11 @@ function readJsonFile(tree: Tree, path: string) {
 
 function addPackageJsonDependency(
   tree: Tree,
-  context: SchematicContext,
   name: string,
   version: string,
   path: string
 ) {
   const json = readJsonFile(tree, path);
-  context.addTask(new NodePackageInstallTask());
   if (json) {
     json.dependencies = { ...json.dependencies, [name]: `^${version}` };
   }
