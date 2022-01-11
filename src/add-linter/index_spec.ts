@@ -1,14 +1,16 @@
+import { Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
 import * as path from 'path';
 
 const collectionPath = path.join(__dirname, '../collection.json');
 
-describe('wolox-angular-bootstrap', () => {
+describe('add-linter', () => {
   it('works', async () => {
     const runner = new SchematicTestRunner('schematics', collectionPath);
     const tree = await runner
-      .runSchematicAsync('initialize', { name: 'foo' })
+      .runSchematicAsync('add-linter', {}, Tree.empty())
       .toPromise();
-    expect(tree.files).toBeTruthy();
+
+    expect(tree.files).toEqual([]);
   });
 });
