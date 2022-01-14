@@ -1,25 +1,40 @@
-export const jestPackage = { 
-  "testPathIgnorePatterns": [
-    "<rootDir>/node_modules/",
-    "<rootDir>/dist/",
-    "<rootDir>/src/test.ts"
-  ]
-}
+export const jestPackage = {
+  globals: {
+    'ts-jest': {
+      astTransformers: {
+        before: [
+          'jest-preset-angular/build/InlineFilesTransformer',
+          'jest-preset-angular/build/StripStylesTransformer',
+        ],
+      },
+    },
+  },
+  preset: 'jest-preset-angular',
+  setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
+  testPathIgnorePatterns: [
+    '<rootDir>/node_modules/',
+    '<rootDir>/dist/',
+    '<rootDir>/src/test.ts',
+  ],
+};
 
+export const devDependencies = {
+  '@angular-eslint/schematics': '^13.0.1',
+  '@wolox/eslint-config-typescript': '^3.0.0',
+};
 
 export const dependencies = [
-  "@angular-builders/jest",
-  "@types/jest",
-  "jest",
-  "jest-preset-angular",
-]
-
+  '@angular-builders/jest',
+  '@types/jest',
+  'jest',
+  'jest-preset-angular',
+];
 
 export const removeDependencies = [
-  "@types/jasmine",
-  "karma",
-  "karma-chrome-launcher",
-  "karma-coverage-istanbul-reporter",
-  "karma-jasmine",
-  "karma-jasmine-html-reporter"
-]
+  '@types/jasmine',
+  'karma',
+  'karma-chrome-launcher',
+  'karma-coverage-istanbul-reporter',
+  'karma-jasmine',
+  'karma-jasmine-html-reporter',
+];

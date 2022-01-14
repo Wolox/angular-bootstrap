@@ -3,8 +3,13 @@
   "schematics": {
     "initialize": {
       "description": "A blank schematic.",
-      "factory": "./wolox-angular-bootstrap/index#woloxAngularBootstrap",
+      "factory": "./wolox-angular-bootstrap/index#initialize",
       "schema": "./wolox-angular-bootstrap/schema.json"
+    },
+    "add-linter": {
+      "description": "A linter schematic",
+      "factory": "./add-linter/index#addLinter",
+      "schema": "./add-linter/schema.json"
     }
   }
 }

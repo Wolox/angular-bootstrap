@@ -5,19 +5,34 @@ Create Angular-CLI project and configure Jest for Unit test
 
 ## How use 
 
+- Initialize a project.
+
 ```bash
   schematics wolox-angular-bootstrap:initialize
 ```
 
+- Add typescript and angular rules for linter
+
+```bash
+  schematics wolox-angular-bootstrap:add-linter
+```
+
 ## Prerequisites 
 
- - Install Angular schematics 
+- Install Angular schematics CLI
 
-  ```bash
-    npm i @angular-devkit/schematics-cli
-  ```
- - Install Wolox bootstrap
+```bash
+  npm i -g @angular-devkit/schematics-cli
+```
 
-  ```bash
-    npm i -g wolox-angular-bootstrap
-  ```
+- Install Angular schematics
+
+```bash
+  npm i -g @schematics/angular
+```
+
+- Install Wolox bootstrap
+
+```bash
+  npm i -g wolox-angular-bootstrap
+```

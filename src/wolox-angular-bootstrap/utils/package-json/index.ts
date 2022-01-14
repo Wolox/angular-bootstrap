@@ -1,7 +1,17 @@
-import { Rule, Tree, SchematicContext, SchematicsException, chain } from "@angular-devkit/schematics";
-import { NodePackageInstallTask } from "@angular-devkit/schematics/tasks";
-import { dependencies, removeDependencies, jestPackage } from './constants';
-import { get } from 'http';
+import {
+  Rule,
+  Tree,
+  SchematicContext,
+  SchematicsException,
+  chain,
+} from '@angular-devkit/schematics';
+import {
+  dependencies,
+  devDependencies,
+  jestPackage,
+  removeDependencies,
+} from './constants';
+import { get } from 'https';
 
 import { concat, Observable, of } from 'rxjs';
 import { concatMap, map } from 'rxjs/operators';
@@ -12,23 +22,26 @@ export interface NodePackage {
 }
 
 export function removePackages(name: string): Rule {
-  return (tree: Tree, context: SchematicContext): Tree => {
-    context.addTask(new NodePackageInstallTask());
+  return (tree: Tree, _context: SchematicContext): Tree => {
     const path = `/${name}/package.json`;
-    const json = readJsonFile(tree, path)
+    const json = readJsonFile(tree, path);
 
-    if (json) {      
+    if (json) {
       // Update scripts
       json.scripts = {
         ...json.scripts,
-        test: "jest",
+        test: 'jest',
       };
 
+      // Add new devDependencies
+      json.devDependencies = { ...json.devDependencies, ...devDependencies };
       // Add jest config
-      json.jest = { ...jestPackage }
+      json.jest = { ...jestPackage };
 
       // Remove dependencies
-      removeDependencies.forEach((dependency: string) => delete json.devDependencies[dependency])
+      removeDependencies.forEach(
+        (dependency: string) => delete json.devDependencies[dependency]
+      );
 
       tree.overwrite(path, JSON.stringify(json, null, 2));
       return tree;
@@ -37,11 +50,8 @@ export function removePackages(name: string): Rule {
   };
 }
 
-export function updatePackageJson(name :string): Rule {
-  return chain([
-    removePackages(name),
-    addPackages(name)
-  ]);
+export function updatePackageJson(name: string): Rule {
+  return chain([removePackages(name), addPackages(name)]);
 }
 
 function addPackages(name: string): Rule {
@@ -52,12 +62,12 @@ function addPackages(name: string): Rule {
       map((packageFromRegistry: NodePackage) => {
         const { name, version } = packageFromRegistry;
         context.logger.debug(`Adding ${name}:${version} to Dev Dependencies`);
-        addPackageJsonDependency(tree, context, name, version, path)
+        addPackageJsonDependency(tree, name, version, path);
         return tree;
       })
-    )
+    );
     return concat(newDependencies);
-  }
+  };
 }
 
 /**
@@ -65,13 +75,18 @@ function addPackages(name: string): Rule {
  * Return an optional "latest" version in case of error
  * @param packageName
  */
-export function getLatestNodeVersion(packageName: string): Promise<NodePackage> {
+export function getLatestNodeVersion(
+  packageName: string
+): Promise<NodePackage> {
   const DEFAULT_VERSION = 'latest';
 
   return new Promise((resolve) => {
-    return get(`http://registry.npmjs.org/${packageName}`, (res) => {
+    return get(`https://registry.npmjs.org/${packageName}`, (res) => {
       let rawData = '';
-      res.on('data', (chunk) => (rawData += chunk));
+      res.setEncoding('utf8');
+      res.on('data', (chunk) => {
+        rawData += chunk;
+      });
       res.on('end', () => {
         try {
           const response = JSON.parse(rawData);
@@ -85,23 +100,29 @@ export function getLatestNodeVersion(packageName: string): Promise<NodePackage> 
     }).on('error', () => resolve(buildPackage(packageName)));
   });
 
-  function buildPackage(name: string, version: string = DEFAULT_VERSION): NodePackage {
+  function buildPackage(
+    name: string,
+    version: string = DEFAULT_VERSION
+  ): NodePackage {
     return { name, version };
   }
 }
 
-function readJsonFile(tree: Tree, path: string, ) {
+function readJsonFile(tree: Tree, path: string) {
   if (tree.exists(path)) {
     const file = tree.read(path);
     return JSON.parse(file!.toString());
   }
-  return null
+  return null;
 }
 
-
-function addPackageJsonDependency(tree: Tree, context: SchematicContext, name: string, version: string, path: string) {
+function addPackageJsonDependency(
+  tree: Tree,
+  name: string,
+  version: string,
+  path: string
+) {
   const json = readJsonFile(tree, path);
-  context.addTask(new NodePackageInstallTask());
   if (json) {
     json.dependencies = { ...json.dependencies, [name]: `^${version}` };
   }

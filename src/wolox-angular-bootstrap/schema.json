@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "NewRepoSchematic",
+  "$id": "initialize",
   "title": "ng new options schema",
   "type": "object",
   "description": "Initialize a new project",
