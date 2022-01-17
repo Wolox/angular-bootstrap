@@ -16,6 +16,7 @@ import { updateTsConfig, updateTsConfigSpec } from './utils/ts-config';
 import { angularJson } from './utils/angular-json';
 import { removeKarma } from './utils/remove-files';
 import { RunSchematicTask } from '@angular-devkit/schematics/tasks';
+import { replaceFiles } from './utils/replace-files';
 
 export function initialize(_options: any): Rule {
   const { name, style, routing } = _options;
@@ -33,6 +34,7 @@ export function initialize(_options: any): Rule {
       updateTsConfigSpec(name),
       angularJson(name),
       removeKarma(name),
+      replaceFiles(name),
     ]);
 
     context.addTask(new RunSchematicTask('add-linter', { project: name }));
