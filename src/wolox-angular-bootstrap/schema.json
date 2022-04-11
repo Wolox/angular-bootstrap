@@ -13,6 +13,12 @@
         "$source": "argv",
         "index": 0
       }
-    } 
+    },
+    "storybook": {
+      "type": "boolean",
+      "description": "Would you like to add storybooks?",
+      "x-prompt": "Would you like to add storybooks?",
+      "default": false
+    }
   }
 }
