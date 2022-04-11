@@ -32,6 +32,12 @@
         "less",
         "styl"
       ]
+    },
+    "storybook": {
+      "type": "boolean",
+      "description": "Would you like to add storybooks?",
+      "x-prompt": "Would you like to add storybooks?",
+      "default": false
     }
   },
   "required": ["name", "routing"]
