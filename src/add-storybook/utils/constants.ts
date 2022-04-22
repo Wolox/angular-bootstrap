@@ -1,15 +1,21 @@
+const BABEL_CORE_VERSION = '^7.17.x';
+const COMPODOC_VERSION = '^1.1.x';
+const STORYBOOK_VERSION = '^6.4.x';
+const STORYBOOK_TESTING_VERSION = '0.0.x';
+const BABEL_LOADER_VERSION = '^8.2.x';
+
 export const dependencies = {
-    "@babel/core": "^7.17.9",
-    "@compodoc/compodoc": "^1.1.19",
-    "@storybook/addon-actions": "^6.4.20",
-    "@storybook/addon-essentials": "^6.4.20",
-    "@storybook/addon-interactions": "^6.4.20",
-    "@storybook/addon-links": "^6.4.20",
-    "@storybook/angular": "^6.4.20",
-    "@storybook/builder-webpack5": "^6.4.20",
-    "@storybook/manager-webpack5": "^6.4.20",
-    "@storybook/testing-library": "0.0.9",
-    "babel-loader": "^8.2.4",
+    "@babel/core": BABEL_CORE_VERSION,
+    "@compodoc/compodoc": COMPODOC_VERSION,
+    "@storybook/addon-actions": STORYBOOK_VERSION,
+    "@storybook/addon-essentials": STORYBOOK_VERSION,
+    "@storybook/addon-interactions": STORYBOOK_VERSION,
+    "@storybook/addon-links": STORYBOOK_VERSION,
+    "@storybook/angular": STORYBOOK_VERSION,
+    "@storybook/builder-webpack5": STORYBOOK_VERSION,
+    "@storybook/manager-webpack5": STORYBOOK_VERSION,
+    "@storybook/testing-library": STORYBOOK_TESTING_VERSION,
+    "babel-loader": BABEL_LOADER_VERSION,
 }
 
 export const scripts = {
