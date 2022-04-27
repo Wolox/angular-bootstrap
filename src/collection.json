@@ -10,6 +10,11 @@
       "description": "A linter schematic",
       "factory": "./add-linter/index#addLinter",
       "schema": "./add-linter/schema.json"
+    },
+    "add-storybook": {
+      "description": "Add Storybooks.",
+      "factory": "./add-storybook/index#storybook",
+      "schema": "./add-storybook/schema.json"
     }
   }
 }

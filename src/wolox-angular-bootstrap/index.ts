@@ -18,7 +18,7 @@ import { removeKarma } from './utils/remove-files';
 import { RunSchematicTask } from '@angular-devkit/schematics/tasks';
 
 export function initialize(_options: any): Rule {
-  const { name } = _options;
+  const { name, storybook } = _options;
   return (_tree: Tree, context: SchematicContext) => {
     const templateSource = apply(url('./files'), [
       template({ ..._options, ...strings }),
@@ -36,6 +36,10 @@ export function initialize(_options: any): Rule {
     ]);
 
     context.addTask(new RunSchematicTask('add-linter', { project: name }));
+
+    if(storybook) {
+      context.addTask(new RunSchematicTask('add-storybook', { project: name }));
+    }
 
     return rule(_tree, context) as Rule;
   };
