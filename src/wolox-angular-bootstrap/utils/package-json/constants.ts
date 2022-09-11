@@ -19,7 +19,7 @@ export const jestPackage = {
 };
 
 export const devDependencies = {
-  '@angular-eslint/schematics': '^13.0.1',
+  '@angular-eslint/schematics': '^14.0.4',
   '@wolox/eslint-config-typescript': '^3.0.0',
 };
 
