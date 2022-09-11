@@ -7,7 +7,7 @@ const karmaFilesPaths = [
 export function removeKarma(name: string): Rule {
   return (tree: Tree, _: SchematicContext): Tree => {
     karmaFilesPaths.forEach((file) => {
-      const path = `${name}/${file}`
+      const path = `/${name}/${file}`;
       if (tree.exists(path)) {
         tree.delete(path);
       }

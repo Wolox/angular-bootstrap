@@ -25,6 +25,12 @@ schematics wolox-angular-bootstrap:add-linter
 
 ## Prerequisites 
 
+- Angular CLI ^14.0.0
+
+```bash
+  npm install -g @angular/cli
+```
+
 - Install Angular schematics CLI
 
 ```bash
