@@ -1,4 +1,4 @@
-const ANGULAR_ESLINT_VERSION = '13.x';
+const ANGULAR_ESLINT_VERSION = '14.x';
 const TS_ESLINT_VERSION = '5.x';
 
 export const devDependencies = {

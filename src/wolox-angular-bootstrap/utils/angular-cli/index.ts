@@ -14,7 +14,7 @@ export function schematicAngularCLI(name: string): Rule {
   return (_tree: Tree, _context: SchematicContext) => {
     const options: AngularNgNewSchema = {
       name,
-      version: '13.x',
+      version: '14.x',
       routing: true,
       strict: true,
       style: Style.Scss,
