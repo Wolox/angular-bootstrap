@@ -32,7 +32,7 @@ export function initialize(_options: any): Rule {
       updateTsConfig(name),
       updateTsConfigSpec(name),
       angularJson(name),
-      removeKarma(),
+      removeKarma(name),
     ]);
 
     context.addTask(new RunSchematicTask('add-linter', { project: name }));

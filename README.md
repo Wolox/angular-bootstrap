@@ -19,6 +19,12 @@ Create Angular-CLI project and configure Jest for Unit test
 
 ## Prerequisites 
 
+- Angular CLI ^14.0.0
+
+```bash
+  npm install -g @angular/cli
+```
+
 - Install Angular schematics CLI
 
 ```bash

@@ -4,11 +4,12 @@ const karmaFilesPaths = [
   "./karma.conf.js"
 ];
 
-export function removeKarma(): Rule {
+export function removeKarma(name: string): Rule {
   return (tree: Tree, _: SchematicContext): Tree => {
     karmaFilesPaths.forEach((file) => {
-      if (tree.exists(file)) {
-        tree.delete(file);
+      const path = `/${name}/${file}`;
+      if (tree.exists(path)) {
+        tree.delete(path);
       }
     });
     return tree;
