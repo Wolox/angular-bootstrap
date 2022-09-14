@@ -8,7 +8,7 @@ import {
 import {
   dependencies,
   devDependencies,
-  jestPackage,
+  staticDependencies,
   removeDependencies,
 } from './constants';
 import { get } from 'https';
@@ -33,10 +33,11 @@ export function removePackages(name: string): Rule {
         test: 'jest',
       };
 
+      // Add static dependencies
+      json.dependencies = { ...json.dependencies, ...staticDependencies };
+
       // Add new devDependencies
       json.devDependencies = { ...json.devDependencies, ...devDependencies };
-      // Add jest config
-      json.jest = { ...jestPackage };
 
       // Remove dependencies
       removeDependencies.forEach(
