@@ -19,16 +19,19 @@ export const jestPackage = {
 };
 
 export const devDependencies = {
-  '@angular-eslint/schematics': '^13.0.1',
+  '@angular-eslint/schematics': '^14.0.4',
   '@wolox/eslint-config-typescript': '^3.0.0',
 };
 
 export const dependencies = [
   '@angular-builders/jest',
   '@types/jest',
-  'jest',
-  'jest-preset-angular',
 ];
+
+export const staticDependencies = {
+  jest: '^28.1.3',
+  'jest-preset-angular': '^12.2.2',
+}
 
 export const removeDependencies = [
   '@types/jasmine',
