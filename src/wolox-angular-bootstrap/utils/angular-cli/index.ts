@@ -25,7 +25,7 @@ export function schematicAngularCLI(
       directory: name,
       packageManager: PackageManager.Npm,
     };
-
+    _context.logger.info(` [] ====== ⚡️ Running angular schematics`);
     return externalSchematic('@schematics/angular', 'ng-new', options);
   };
 }

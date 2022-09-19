@@ -22,6 +22,7 @@ export function updateTsConfig(name: string): Rule {
         esModuleInterop: true,
       };
 
+      _context.logger.info(` [] ====== 🚑️ Update ts configuration`);
       tree.overwrite(path, JSON.stringify(json, null, 2));
       return tree;
     }
@@ -47,6 +48,7 @@ export function updateTsConfigSpec(name: string): Rule {
         types: ['jest'],
       };
       json.files = ['src/polyfills.ts'];
+      _context.logger.info(` [] ====== 📝 Update ts spec configuration`);
       tree.overwrite(path, JSON.stringify(json, null, 2));
       return tree;
     }

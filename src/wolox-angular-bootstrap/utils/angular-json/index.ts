@@ -15,7 +15,7 @@ export function angularJson(name: string): Rule {
       const architect = angular.projects[`${name}`].architect;
 
       architect.test = { ...angularJsonConfigTest };
-
+      _.logger.info(` [] ====== 👷 Update angular json file`);
       tree.overwrite(path, JSON.stringify(angular, null, 2));
       return tree;
     }

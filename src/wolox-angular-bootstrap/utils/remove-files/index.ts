@@ -12,6 +12,8 @@ export function removeKarma(name: string): Rule {
         tree.delete(path);
       }
     });
+
+    _.logger.info(` [] ====== 🗑️ Remove karma configuration`);
     return tree;
   };
 }

@@ -45,6 +45,7 @@ export function removePackages(name: string): Rule {
       );
 
       tree.overwrite(path, JSON.stringify(json, null, 2));
+      _context.logger.info(` [] ====== 🔥 Remove package json dependencies`);
       return tree;
     }
     throw new SchematicsException(`Does not exist ${path}.`);
@@ -63,7 +64,7 @@ function addPackages(name: string): Rule {
       map((packageFromRegistry: NodePackage) => {
         const { name, version } = packageFromRegistry;
         context.logger.debug(`Adding ${name}:${version} to Dev Dependencies`);
-        addPackageJsonDependency(tree, name, version, path);
+        addPackageJsonDependency(tree, context, name, version, path);
         return tree;
       })
     );
@@ -119,6 +120,7 @@ function readJsonFile(tree: Tree, path: string) {
 
 function addPackageJsonDependency(
   tree: Tree,
+  _context: SchematicContext,
   name: string,
   version: string,
   path: string
@@ -128,5 +130,6 @@ function addPackageJsonDependency(
     json.dependencies = { ...json.dependencies, [name]: `^${version}` };
   }
   tree.overwrite(path, JSON.stringify(json, null, 2));
+  _context.logger.info(` [] ====== 🐛 Add custom package json dependencies`);
   return tree;
 }

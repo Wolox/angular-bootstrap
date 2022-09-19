@@ -8,6 +8,7 @@ import {
   mergeWith,
   MergeStrategy,
   chain,
+  Source,
 } from '@angular-devkit/schematics';
 import { strings } from '@angular-devkit/core';
 import { schematicAngularCLI } from './utils/angular-cli';
@@ -18,17 +19,21 @@ import { removeKarma } from './utils/remove-files';
 import { RunSchematicTask } from '@angular-devkit/schematics/tasks';
 import { replaceFiles } from './utils/replace-files';
 
+const merged = (context: SchematicContext, templateSource: Source) => { 
+  context.logger.info(` [] ====== 🚨 Overwrite template source files`);
+  return mergeWith(templateSource, MergeStrategy.Overwrite);
+}
+
 export function initialize(_options: any): Rule {
   const { name, style, routing, storybook } = _options;
   return (_tree: Tree, context: SchematicContext) => {
     const templateSource = apply(url('./files'), [
       template({ ..._options, ...strings }),
     ]);
-    const merged = mergeWith(templateSource, MergeStrategy.Overwrite);
 
     const rule = chain([
       schematicAngularCLI(name, routing, style),
-      merged,
+      merged(context, templateSource),
       updatePackageJson(name),
       updateTsConfig(name),
       updateTsConfigSpec(name),
