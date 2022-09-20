@@ -15,7 +15,7 @@ export function replaceFavicon(name: string): Rule {
     if (tree.exists(file)) {
       tree.delete(file);
     }
-
+    _.logger.info(` [] ====== 💄 Replace favicon`);
     return mergeWith(
       apply(url('./utils/replace-files/favicon/files'), [move(path)])
     );
