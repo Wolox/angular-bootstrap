@@ -25,6 +25,9 @@ schematics wolox-angular-bootstrap:add-linter
 
 ## Prerequisites 
 
+- Node 
+We recommend using a higher version of node 14 and keeping npm up to date.
+
 - Angular CLI ^14.0.0
 
 ```bash
